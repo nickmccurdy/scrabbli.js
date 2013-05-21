@@ -2,6 +2,8 @@
 /*jslint plusplus: true */
 /*jslint browser: true */
 
+/*global Gaddag */
+
 "use strict";
 
 (function () {

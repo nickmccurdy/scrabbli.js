@@ -2,6 +2,8 @@
 /*jslint plusplus: true */
 /*jslint browser: true */
 
+/*global Trie */
+
 "use strict";
 
 // requires trie.js and util.js
