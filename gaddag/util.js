@@ -32,6 +32,5 @@ function log(message, newline) {
     newline = true;
   }
 
-  //console.log(message + (newline ? "\n" : ""));
-  document.write(message + (newline ? "<br/><br/>" : ""));
+  console.log(message + (newline ? "<br/><br/>" : ""));
 }
