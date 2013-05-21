@@ -122,9 +122,7 @@ function Gaddag() {
 
           // if we have reached the end of this subtree, add the word (+ last character) to output array
           if (nodeVal === 0) {
-            if (nodeCh !== '' && rack.indexOf(nodeCh) === -1) {
-              continue;
-            } else {
+            if (!(nodeCh !== '' && rack.indexOf(nodeCh) === -1)) {
               words.push(word + nodeCh);
             }
           } else {
