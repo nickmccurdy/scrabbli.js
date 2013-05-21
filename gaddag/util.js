@@ -2,8 +2,6 @@
 /*jslint plusplus: true */
 /*jslint browser: true */
 
-/*jslint evil: true */
-
 "use strict";
 
 // Utility functions
