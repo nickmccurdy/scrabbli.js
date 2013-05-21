@@ -1,4 +1,9 @@
 /*jslint indent: 2 */
+/*jslint plusplus: true */
+/*jslint browser: true */
+/*global browser */
+
+/*jslint evil: true */
 
 "use strict";
 
@@ -6,16 +11,16 @@
 
 // Array Remove - By John Resig (MIT Licensed)
 // http://ejohn.org/blog/javascript-array-remove/
-Array.prototype.remove = function(from, to) {
+Array.prototype.remove = function (from, to) {
   var rest = this.slice((to || from) + 1 || this.length);
   this.length = from < 0 ? this.length + from : from;
   return this.push.apply(this, rest);
 };
 
 // http://www.shamasis.net/2009/09/fast-algorithm-to-find-unique-items-in-javascript-array/#comment-348025468
-Array.prototype.unique = function(){
-  return this.filter(function(s, i, a){ return i == a.lastIndexOf(s); });
-}
+Array.prototype.unique = function () {
+  return this.filter(function (s, i, a) { return i === a.lastIndexOf(s); });
+};
 
 /*
   message - Message to log.
@@ -24,8 +29,9 @@ Array.prototype.unique = function(){
 function log(message, newline) {
 
   // for convenience, set default to true
-  if(typeof newline === 'undefined')
+  if (typeof newline === 'undefined') {
     newline = true;
+  }
 
   // If not browser, assume nodejs
   if (typeof browser === 'undefined') {
