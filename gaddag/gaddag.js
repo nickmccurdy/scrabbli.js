@@ -2,7 +2,7 @@
 /*jslint plusplus: true */
 /*jslint browser: true */
 
-/*global Trie */
+/*global _, Trie */
 
 "use strict";
 
@@ -101,7 +101,7 @@ function Gaddag() {
             duplicate = (i > 0 ? (rack[i] === rack[i - 1] ? true : false) : false);
             if (!duplicate) {
               newRack = rack.slice(0);
-              newRack.remove(i);
+              newRack = _.without(newRack, (i));
               findWordsRecurse(word, newRack, nodeKey, hookNode, direction);
             }
           }
@@ -151,7 +151,7 @@ function Gaddag() {
       findWordsRecurse("", rack, hook, trie, 'reverse');
     }
 
-    return words.unique();
+    return _.uniq(words);
   };
 }
 
