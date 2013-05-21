@@ -2,12 +2,13 @@
 /*jslint plusplus: true */
 /*jslint browser: true */
 
-/*global $, Gaddag */
+/*global $, Gaddag, Scorer */
 
 "use strict";
 
 (function () {
   var gaddag = new Gaddag(),
+    scorer = new Scorer(),
     wordArray = ["A", "AT", "CAR", "CAT", "CARE", "CARREL", "DATE", "PRECEDE", "PRESTO", "RADIUS"];
 
   function init() {
@@ -34,6 +35,10 @@
     log("All words with E that can be formed using D, P, A, T, R, O and S: " + gaddag.findWordsWithRackAndHook(['D', 'P', 'A', 'T', 'R', 'O', 'S'], 'E').join(', '));
 
     log("All words that can be formed using ['D', 'P', 'A', 'T', 'R', 'C', 'E'] at start of game (no hook): " + gaddag.findWordsWithRackAndHook(['D', 'P', 'A', 'T', 'R', 'C', 'E'], '').join(', '));
+
+    log("Score for RADIUS: " + scorer.score("RADIUS"));
+    log("Words sorted by score: " + scorer.sortByScore(wordArray).join(", "));
+    log("Best scoring word: " + scorer.findBestWord(wordArray));
   }
 
   test();
