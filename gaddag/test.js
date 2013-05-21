@@ -11,6 +11,7 @@
     wordArray = ["A", "AT", "CAR", "CAT", "CARE", "CARREL", "DATE", "PRECEDE", "PRESTO", "RADIUS"];
 
   function init() {
+    $("body").append('<h1>GADDAG Test</h1>');
     $("body").append('<ul id="test-log"></ul>');
   }
 
