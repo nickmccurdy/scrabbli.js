@@ -1,7 +1,6 @@
 /*jslint indent: 2 */
 /*jslint plusplus: true */
 /*jslint browser: true */
-/*global browser */
 
 /*jslint evil: true */
 
@@ -33,16 +32,6 @@ function log(message, newline) {
     newline = true;
   }
 
-  // If not browser, assume nodejs
-  if (typeof browser === 'undefined') {
-    console.log(message + (newline ? "\n" : ""));
-  } else {
-    document.write(message + (newline ? "<br/><br/>" : ""));
-  }
-}
-
-
-// If not browser, assume nodejs
-if (typeof browser === 'undefined') {
-  module.exports.log = log;
+  //console.log(message + (newline ? "\n" : ""));
+  document.write(message + (newline ? "<br/><br/>" : ""));
 }

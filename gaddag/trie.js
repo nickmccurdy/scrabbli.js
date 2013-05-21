@@ -1,7 +1,6 @@
 /*jslint indent: 2 */
 /*jslint plusplus: true */
 /*jslint browser: true */
-/*global browser */
 
 "use strict";
 
@@ -100,11 +99,6 @@ function Trie() {
 
     return ret;
   };
-}
-
-// If not browser, assume nodejs
-if (typeof browser === 'undefined') {
-  module.exports.Trie = Trie;
 }
 
 /*

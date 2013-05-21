@@ -1,15 +1,9 @@
 /*jslint indent: 2 */
 /*jslint plusplus: true */
 /*jslint browser: true */
-/*global browser */
 
 "use strict";
 
-// If not browser, assume nodejs
-if (typeof browser === 'undefined') {
-  var Gaddag = require('./gaddag.js').Gaddag;
-  var log = require('./util.js').log;
-}
 (function () {
   var gaddag = new Gaddag(),
     wordArray = ["A", "AT", "CAR", "CAT", "CARE", "CARREL", "DATE", "PRECEDE", "PRESTO", "RADIUS"];

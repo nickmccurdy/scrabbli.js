@@ -1,7 +1,6 @@
 /*jslint indent: 2 */
 /*jslint plusplus: true */
 /*jslint browser: true */
-/*global browser */
 
 "use strict";
 
@@ -9,12 +8,6 @@
 
 // TODO: Handle no hook case - just use first function?
 //      or maybe make each rack letter a hook and call recursive function
-
-// If not browser, assume nodejs
-if (typeof browser === 'undefined') {
-  var Trie = require('./trie.js').Trie;
-  require('./util.js');
-}
 
 function Gaddag() {
 
@@ -164,8 +157,3 @@ function Gaddag() {
 
 // Inherit from Trie
 Gaddag.prototype = new Trie();
-
-// If not browser, assume nodejs
-if (typeof browser === 'undefined') {
-  module.exports.Gaddag = Gaddag;
-}
