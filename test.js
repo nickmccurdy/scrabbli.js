@@ -2,7 +2,7 @@
 /*jslint plusplus: true */
 /*jslint browser: true */
 
-/*global $, test, ok, _, Gaddag, Scorer */
+/*global $, test, ok, _, Gaddag, Scorer, dictionary_sample */
 
 "use strict";
 
@@ -30,4 +30,8 @@ test("Scorer", function() {
   ok(scorer.score("RADIUS") === 7, "should find the score for RADIUS");
   ok(_.isEqual(scorer.sortByScore(wordArray), ["PRECEDE", "PRESTO", "CARREL", "RADIUS", "CARE", "DATE", "CAT", "CAR", "AT", "A"]), "should sort the words by decreasing score");
   ok(scorer.findBestWord(wordArray) === "PRECEDE", "should find the best scoring word");
+});
+
+test("Performance", function() {
+  ok(gaddag.addAll(dictionary_sample), "for adding words to a GADDAG");
 });
