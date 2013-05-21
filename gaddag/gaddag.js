@@ -1,3 +1,7 @@
+/*jslint indent: 2 */
+
+"use strict";
+
 // requires trie.js and util.js
 
 // TODO: Handle no hook case - just use first function?

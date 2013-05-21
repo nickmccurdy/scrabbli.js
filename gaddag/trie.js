@@ -1,3 +1,6 @@
+/*jslint indent: 2 */
+
+"use strict";
 
 function Trie() {
 

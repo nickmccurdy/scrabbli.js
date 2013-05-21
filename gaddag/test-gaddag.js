@@ -1,3 +1,6 @@
+/*jslint indent: 2 */
+
+"use strict";
 
 // If not browser, assume nodejs
 if (typeof browser === 'undefined') {

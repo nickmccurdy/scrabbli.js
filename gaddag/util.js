@@ -1,3 +1,7 @@
+/*jslint indent: 2 */
+
+"use strict";
+
 // Utility functions
 
 // Array Remove - By John Resig (MIT Licensed)
