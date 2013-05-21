@@ -33,7 +33,7 @@ function Trie() {
       letter = letters[j];
       pos = cur[letter];
 
-      if (pos === null) {
+      if (pos === undefined) {
         cur = cur[letter] = j === letters.length - 1 ? 0 : {};
 
       } else if (pos === 0) {
