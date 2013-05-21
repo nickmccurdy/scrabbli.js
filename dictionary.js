@@ -1,3 +1,5 @@
+// If you value your sanity, please leave before reading the rest of this file.
+
 var dictionary = [
   "AA",
   "AAH",
