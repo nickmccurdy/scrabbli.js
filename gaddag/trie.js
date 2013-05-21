@@ -13,9 +13,11 @@ function Trie() {
   };
 
   this.addAll = function (words) {
-    var i, l;
+    var i, l, percent;
 
     for (i = 0, l = words.length; i < l; i++) {
+      percent = 100 * i / words.length;
+      console.log("adding word " + i + " of " + l + " (" + percent + "% complete)");
       this.add(words[i]);
     }
 
