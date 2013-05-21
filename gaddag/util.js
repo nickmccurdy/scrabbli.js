@@ -20,17 +20,3 @@ Array.prototype.remove = function (from, to) {
 Array.prototype.unique = function () {
   return this.filter(function (s, i, a) { return i === a.lastIndexOf(s); });
 };
-
-/*
-  message - Message to log.
-  newline - If true, a new line is appended to the logged message. Default is true.
- */
-function log(message, newline) {
-
-  // for convenience, set default to true
-  if (typeof newline === 'undefined') {
-    newline = true;
-  }
-
-  console.log(message + (newline ? "<br/><br/>" : ""));
-}
