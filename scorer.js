@@ -1,3 +1,7 @@
+/*global _ */
+
+"use strict";
+
 function Scorer() {
 
   var letterScores = {
@@ -37,7 +41,7 @@ function Scorer() {
   };
 
   this.sortByScore = function (words) {
-    scorer = new Scorer();
+    var scorer = new Scorer();
     return _.sortBy(words, function (word) {
       return scorer.score(word);
     }).reverse();
