@@ -69,7 +69,7 @@ test("score()", function () {
 });
 
 test("sortByScore()", function () {
-  deepEqual(scorer.sortByScore(wordArray), ["PRECEDE", "PRESTO", "CARREL", "RADIUS", "CARE", "DATE", "CAR", "CAT", "AT", "A"], "should sort the words by decreasing score");
+  deepEqual(scorer.sortByScore(wordArray), ["PRECEDE", "CARREL", "PRESTO", "RADIUS", "CARE", "CAR", "CAT", "DATE", "AT", "A"], "should sort the words by decreasing score");
 });
 
 test("findBestWord()", function () {
