@@ -27,12 +27,12 @@ test("Gaddag", function () {
   ok(_.isEqual(gaddag.findWordsWithRackAndHook(["S", "D", "T", "I", "A", "R"], "U"), ["RADIUS"]), "should find all words with U that can be formed using S, D, T, I, A and R");
   ok(_.isEqual(gaddag.findWordsWithRackAndHook(["D", "P", "A", "T", "R", "O", "S"], "E"), ["PRESTO", "DATE"]), "should find all words with E that can be formed using D, P, A, T, R, O and S");
 
-  ok(_.isEqual(gaddag.findWordsWithRackAndHook(["D", "P", "A", "T", "R", "C", "E"], ""), ["A", "AT", "CAR", "CARE", "CAT", "DATE", "PRECEDE"]), 'should find all words that can be formed using ["D", "P", "A", "T", "R", "C", "E"] at start of game (no hook)');
+  ok(_.isEqual(gaddag.findWordsWithRackAndHook(["D", "P", "A", "T", "R", "C", "E"], ""), ["A", "AT", "CAR", "CARE", "CAT", "DATE"]), 'should find all words that can be formed using ["D", "P", "A", "T", "R", "C", "E"] at start of game (no hook)');
 });
 
 test("Scorer", function () {
   ok(scorer.score("RADIUS") === 7, "should find the score for RADIUS");
-  ok(_.isEqual(scorer.sortByScore(wordArray), ["PRECEDE", "PRESTO", "CARREL", "RADIUS", "CARE", "DATE", "CAT", "CAR", "AT", "A"]), "should sort the words by decreasing score");
+  ok(_.isEqual(scorer.sortByScore(wordArray), ["PRECEDE", "PRESTO", "CARREL", "RADIUS", "CARE", "DATE", "CAR", "CAT", "AT", "A"]), "should sort the words by decreasing score");
   ok(scorer.findBestWord(wordArray) === "PRECEDE", "should find the best scoring word");
 });
 
