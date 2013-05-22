@@ -5,5 +5,5 @@
 function init() {
   var gaddag = new Gaddag();
 
-  gaddag.addAll(dictionary);
+  gaddag.add(dictionary);
 }

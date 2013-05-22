@@ -6,42 +6,41 @@ function Trie() {
 
   var trie = {};
 
-  this.removeAll = function () {
+  this.clear = function () {
     trie = {};
   };
 
-  this.addAll = function (words) {
-    var i, l, percent;
-    l = words.length;
+  this.add = function (words) {
+    var percent, thisTrie = this;
 
-    for (i = 0; i < l; i++) {
-      percent = 100 * i / words.length;
-      console.log("adding word " + i + " of " + l + " (" + percent + "% complete)");
-      this.add(words[i]);
+    if (typeof words === "string") {
+      this.addWord(words);
+    } else {
+      _.each(words, function (word, index) {
+        percent = 100 * index / words.length;
+        console.log("adding word " + index + " of " + words.length + " (" + percent + "% complete)");
+        thisTrie.addWord(word);
+      });
     }
 
     return this;
   };
 
-  this.add = function (word) {
+  this.addWord = function (word) {
     var letters = word.split(""),
       cur = trie,
-      j,
-      letter,
       pos;
 
     _.each(letters, function (letter, index) {
       pos = cur[letter];
 
       if (pos === undefined) {
-        cur = cur[letter] = index === letters.length - 1 ? 0 : {};
-
+        cur[letter] = index === letters.length - 1 ? 0 : {};
       } else if (pos === 0) {
-        cur = cur[letter] = { $: 0 };
-
-      } else {
-        cur = cur[letter];
+        cur[letter] = { $: 0 };
       }
+
+      cur = cur[letter];
     });
 
     return this;
@@ -52,33 +51,30 @@ function Trie() {
     return trie;
   };
 
+  // from John Resig's dump-trie.js
+  function dig(words, word, cur) {
+    _.each(cur, function (childVal, childNode) {
+      if (childNode === "$") {
+        words.push(word);
+      } else if (childVal === 0) {
+        words.push(word + childNode);
+      } else {
+        words = dig(words, word + childNode, childVal);
+      }
+    });
+
+    return words;
+  }
+
   // Prints all words contained in the Trie
   this.getWords = function () {
-    var words = [];
-
-    // from John Resig's dump-trie.js
-    function dig(word, cur) {
-      var node, val;
-
-      _.each(cur, function (val, node) {
-        if (node === "$") {
-          words.push(word);
-        } else if (val === 0) {
-          words.push(word + node);
-        } else {
-          dig(word + node, val);
-        }
-      });
-    }
-
-    dig("", trie);
-    return words;
+    return dig([], "", trie);
   };
 
-  this.getJson = function () {
+  this.getJSON = function () {
 
     // Commented .replace(...) for debugging as I need the quotes to visualize JSON.
-    var ret = JSON.stringify(trie), //.replace(/"/g, "");
+    var result = JSON.stringify(trie), //.replace(/"/g, "");
       reserved = [ "abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const",
         "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends",
         "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in",
@@ -88,10 +84,10 @@ function Trie() {
       i;
 
     _.each(reserved, function (keyword) {
-      ret = ret.replace(new RegExp("([{,])(" + keyword + "):", "g"), "$1'$2':");
+      result = result.replace(new RegExp("([{,])(" + keyword + "):", "g"), "$1'$2':");
     });
 
-    return ret;
+    return result;
   };
 }
 

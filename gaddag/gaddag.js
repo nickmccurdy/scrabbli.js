@@ -11,7 +11,7 @@ function Gaddag() {
 
   var separator = ">";
 
-  this.add = function (word) {
+  this.addWord = function (word) {
     var i, prefix, ch;
 
     if (word.length === 0) {
