@@ -1,5 +1,5 @@
 jslint:
-	jslint --terse **/*.js
+	jslint --terse *.js gaddag/*.js
 
 deploy:
 	git checkout gh-pages
