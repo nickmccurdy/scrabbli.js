@@ -1,5 +1,5 @@
 jslint:
-	jslint --terse *.js gaddag/*.js
+	jslint *.js gaddag/*.js --terse --indent=2 --nomen --plusplus
 
 deploy:
 	git checkout gh-pages

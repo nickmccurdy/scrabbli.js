@@ -1,8 +1,3 @@
-/*jslint indent: 2 */
-/*jslint plusplus: true */
-/*jslint browser: true */
-
-/*jslint nomen: true*/
 /*global _, Trie */
 
 "use strict";

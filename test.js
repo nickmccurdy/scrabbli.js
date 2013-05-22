@@ -1,7 +1,3 @@
-/*jslint indent: 2 */
-/*jslint plusplus: true */
-/*jslint browser: true */
-
 /*global $, test, ok, _, Gaddag, Scorer, dictionary_sample */
 
 "use strict";
