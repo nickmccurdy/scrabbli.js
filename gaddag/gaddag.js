@@ -23,16 +23,18 @@ function Gaddag() {
       return;
     }
 
-    for (i = 1; i < word.length; i++) {
-      prefix = word.substring(0, i);
-      ch = prefix.split('');
-      ch.reverse();
-      Gaddag.prototype.add(ch.join('') + separator + word.substring(i));
-    }
+    _.each(word, function (letter, index) {
+      if (index > 0) {
+        prefix = word.substring(0, index);
+        ch = prefix.split('');
+        ch.reverse();
+        Gaddag.prototype.add(ch.join('') + separator + word.substring(index));
+      }
+    });
 
     ch = word.split('');
     ch.reverse();
-    Gaddag.prototype.add(ch.join('') + separator + word.substring(i));
+    Gaddag.prototype.add(ch.join('') + separator + word.substring(word.length));
   };
 
   this.findWordsWithHook = function (hook) {
@@ -42,31 +44,28 @@ function Gaddag() {
 
     function dig(word, cur, direction) {
       var node, val, ch, part;
-      for (node in cur) {
-        if (cur.hasOwnProperty(node)) {
-          val = cur[node];
-          ch = (node === separator || node === "$" ? '' : node);
+      _.each(cur, function (val, node) {
+        ch = (node === separator || node === "$" ? '' : node);
 
-          if (val === 0) {
-            words.push(word + ch);
+        if (val === 0) {
+          words.push(word + ch);
 
-          } else {
-            // nodes after this form the suffix
-            if (node === separator) {
-              direction = 'forward';
-            }
-
-            part = (direction === 'reverse' ? ch + word : word + ch);
-            dig(part, val, direction);
-
-          }
-
-          // done with the previous subtree, reset direction to indicate we are in the prefix part of next subtree
+        } else {
+          // nodes after this form the suffix
           if (node === separator) {
-            direction = 'reverse';
+            direction = 'forward';
           }
+
+          part = (direction === 'reverse' ? ch + word : word + ch);
+          dig(part, val, direction);
+
         }
-      }
+
+        // done with the previous subtree, reset direction to indicate we are in the prefix part of next subtree
+        if (node === separator) {
+          direction = 'reverse';
+        }
+      });
     }
 
     if (typeof starterNode === 'undefined') {
@@ -97,16 +96,16 @@ function Gaddag() {
       function processRack(word, rack, nodeKey, hookNode, direction) {
         var i, duplicate, newRack;
 
-        for (i = 0; i < rack.length; i++) {
-          if (nodeKey === rack[i]) {
-            duplicate = (i > 0 ? (rack[i] === rack[i - 1] ? true : false) : false);
+        _.each(rack, function (letter, index) {
+          if (nodeKey === letter) {
+            duplicate = (index > 0 ? (letter === rack[index - 1] ? true : false) : false);
             if (!duplicate) {
               newRack = rack.slice(0);
-              newRack = _.without(newRack, (i));
+              newRack = _.without(newRack, (index));
               findWordsRecurse(word, newRack, nodeKey, hookNode, direction);
             }
           }
-        }
+        });
       }
 
       if (typeof hookNode === 'undefined') {
@@ -116,27 +115,24 @@ function Gaddag() {
       hookCh = (hook === separator || hook === "$" ? '' : hook);
       word = (direction === "reverse" ? hookCh + word : word + hookCh);
 
-      for (nodeKey in hookNode) {
-        if (hookNode.hasOwnProperty(nodeKey)) {
-          nodeVal = hookNode[nodeKey];
-          nodeCh = (nodeKey === separator || nodeKey === "$" ? '' : nodeKey);
+      _.each(hookNode, function (nodeVal, nodeKey) {
+        nodeCh = (nodeKey === separator || nodeKey === "$" ? '' : nodeKey);
 
-          // if we have reached the end of this subtree, add the word (+ last character) to output array
-          if (nodeVal === 0) {
-            if (!(nodeCh !== '' && rack.indexOf(nodeCh) === -1)) {
-              words.push(word + nodeCh);
-            }
+        // if we have reached the end of this subtree, add the word (+ last character) to output array
+        if (nodeVal === 0) {
+          if (!(nodeCh !== '' && rack.indexOf(nodeCh) === -1)) {
+            words.push(word + nodeCh);
+          }
+        } else {
+          // if this is the character separating the prefix, change direction and continue recursing
+          if (nodeKey === separator) {
+            findWordsRecurse(word, rack, separator, hookNode, 'forward');
           } else {
-            // if this is the character separating the prefix, change direction and continue recursing
-            if (nodeKey === separator) {
-              findWordsRecurse(word, rack, separator, hookNode, 'forward');
-            } else {
-              // descend down the next subtree that is rooted at any letter in the rack (which is not a duplicate)
-              processRack(word, rack, nodeKey, hookNode, direction);
-            }
+            // descend down the next subtree that is rooted at any letter in the rack (which is not a duplicate)
+            processRack(word, rack, nodeKey, hookNode, direction);
           }
         }
-      }
+      });
     }
 
     if (hook === '') {

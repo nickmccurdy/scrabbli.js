@@ -2,6 +2,8 @@
 /*jslint plusplus: true */
 /*jslint browser: true */
 
+/*global _ */
+
 "use strict";
 
 function Trie() {
@@ -14,8 +16,9 @@ function Trie() {
 
   this.addAll = function (words) {
     var i, l, percent;
+    l = words.length;
 
-    for (i = 0, l = words.length; i < l; i++) {
+    for (i = 0; i < l; i++) {
       percent = 100 * i / words.length;
       console.log("adding word " + i + " of " + l + " (" + percent + "% complete)");
       this.add(words[i]);
@@ -31,12 +34,11 @@ function Trie() {
       letter,
       pos;
 
-    for (j = 0; j < letters.length; j++) {
-      letter = letters[j];
+    _.each(letters, function (letter, index) {
       pos = cur[letter];
 
       if (pos === undefined) {
-        cur = cur[letter] = j === letters.length - 1 ? 0 : {};
+        cur = cur[letter] = index === letters.length - 1 ? 0 : {};
 
       } else if (pos === 0) {
         cur = cur[letter] = { $: 0 };
@@ -44,7 +46,7 @@ function Trie() {
       } else {
         cur = cur[letter];
       }
-    }
+    });
 
     return this;
   };
@@ -62,21 +64,15 @@ function Trie() {
     function dig(word, cur) {
       var node, val;
 
-      for (node in cur) {
-        if (cur.hasOwnProperty(node)) {
-          val = cur[node];
-
-          if (node === "$") {
-            words.push(word);
-
-          } else if (val === 0) {
-            words.push(word + node);
-
-          } else {
-            dig(word + node, val);
-          }
+      _.each(cur, function (val, node) {
+        if (node === "$") {
+          words.push(word);
+        } else if (val === 0) {
+          words.push(word + node);
+        } else {
+          dig(word + node, val);
         }
-      }
+      });
     }
 
     dig("", trie);
@@ -95,9 +91,9 @@ function Trie() {
         "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with" ],
       i;
 
-    for (i = 0; i < reserved.length; i++) {
-      ret = ret.replace(new RegExp("([{,])(" + reserved[i] + "):", "g"), "$1'$2':");
-    }
+    _.each(reserved, function (keyword) {
+      ret = ret.replace(new RegExp("([{,])(" + keyword + "):", "g"), "$1'$2':");
+    });
 
     return ret;
   };
