@@ -90,11 +90,3 @@ function Trie() {
     return result;
   };
 }
-
-/*
-// Test code
-var t = new Trie();
-t.addAll(["CAR", "CARE", "CARREL", "PRECEDE", "PRESTO", "RADIUS"]);
-console.log("JSON string: " + t.getJson() + "\n");
-console.log("Words: " + t.getWords().join(', '));
-*/

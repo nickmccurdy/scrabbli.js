@@ -1,10 +1,18 @@
-/*global $, test, ok, _, Gaddag, Scorer, dictionary_sample */
+/*global $, test, ok, _, Trie, Gaddag, Scorer, dictionary_sample */
 
 "use strict";
 
-var gaddag = new Gaddag(),
+var trie = new Trie(),
+  gaddag = new Gaddag(),
   scorer = new Scorer(),
   wordArray = ["A", "AT", "CAR", "CAT", "CARE", "CARREL", "DATE", "PRECEDE", "PRESTO", "RADIUS"];
+
+test("Trie", function () {
+  // Test code
+  ok(trie.add(["CAR", "CARE", "CARREL", "PRECEDE", "PRESTO", "RADIUS"]), "should add words to itself");
+  ok(trie.getJSON() === '{"C":{"A":{"R":{"$":0,"E":0,"R":{"E":{"L":0}}}}},"P":{"R":{"E":{"C":{"E":{"D":{"E":0}}},"S":{"T":{"O":0}}}}},"R":{"A":{"D":{"I":{"U":{"S":0}}}}}}', "should get its JSON representation");
+  ok(_.isEqual(trie.getWords(), ["CAR", "CARE", "CARREL", "PRECEDE", "PRESTO", "RADIUS"]), "should get the words it contains");
+});
 
 test("Gaddag", function () {
   ok(gaddag.add(wordArray), "should add words to its inner trie structure");
