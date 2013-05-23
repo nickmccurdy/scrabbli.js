@@ -2,6 +2,14 @@
 
 "use strict";
 
+// Array Remove - By John Resig (MIT Licensed)
+// http://ejohn.org/blog/javascript-array-remove/
+Array.prototype.remove = function (from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
 // requires trie.js and util.js
 
 // TODO: Handle no hook case - just use first function?
@@ -89,14 +97,14 @@ function Gaddag() {
         nodeCh;
 
       function processRack(word, rack, nodeKey, hookNode, direction) {
-        var i, duplicate, newRack;
+        var duplicate, newRack;
 
         _.each(rack, function (letter, index) {
           if (nodeKey === letter) {
             duplicate = (index > 0 ? (letter === rack[index - 1] ? true : false) : false);
             if (!duplicate) {
               newRack = rack.slice(0);
-              newRack = _.without(newRack, (index));
+              newRack.splice(index, 1);
               findWordsRecurse(word, newRack, nodeKey, hookNode, direction);
             }
           }

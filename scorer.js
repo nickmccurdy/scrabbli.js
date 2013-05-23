@@ -42,7 +42,7 @@ function Scorer() {
 
   this.sortByScore = function (words) {
     var scorer = new Scorer();
-    return _.sortBy(words.sort(), function (word) {
+    return _.sortBy(words.sort().reverse(), function (word) {
       return scorer.score(word);
     }).reverse();
   };
