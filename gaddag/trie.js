@@ -6,10 +6,6 @@ function Trie() {
 
   var trie = {};
 
-  this.clear = function () {
-    trie = {};
-  };
-
   this.add = function (words) {
     var percent, thisTrie = this;
 
@@ -46,9 +42,8 @@ function Trie() {
     return this;
   };
 
-  // Returns the JSON structure
-  this.getTrie = function () {
-    return trie;
+  this.clear = function () {
+    trie = {};
   };
 
   // from John Resig's dump-trie.js
@@ -65,11 +60,6 @@ function Trie() {
 
     return words;
   }
-
-  // Prints all words contained in the Trie
-  this.getWords = function () {
-    return dig([], "", trie);
-  };
 
   this.getJSON = function () {
 
@@ -89,4 +79,15 @@ function Trie() {
 
     return result;
   };
+
+  // Returns the JSON structure
+  this.getTrie = function () {
+    return trie;
+  };
+
+  // Prints all words contained in the Trie
+  this.getWords = function () {
+    return dig([], "", trie);
+  };
+
 }
