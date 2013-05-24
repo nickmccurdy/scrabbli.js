@@ -4,7 +4,7 @@
 
 function Trie() {
 
-  var trie = {};
+  this.trie = {};
 
   this.add = function (words) {
     var percent, thisTrie = this;
@@ -24,7 +24,7 @@ function Trie() {
 
   this.addWord = function (word) {
     var letters = word.split(""),
-      cur = trie,
+      cur = this.trie,
       pos;
 
     _.each(letters, function (letter, index) {
@@ -43,7 +43,7 @@ function Trie() {
   };
 
   this.clear = function () {
-    trie = {};
+    this.trie = {};
   };
 
   // from John Resig's dump-trie.js
@@ -64,7 +64,7 @@ function Trie() {
   this.getJSON = function () {
 
     // Commented .replace(...) for debugging as I need the quotes to visualize JSON.
-    var result = JSON.stringify(trie), //.replace(/"/g, "");
+    var result = JSON.stringify(this.trie), //.replace(/"/g, "");
       reserved = [ "abstract", "boolean", "break", "byte", "case", "catch", "char", "class", "const",
         "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends",
         "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in",
@@ -82,12 +82,12 @@ function Trie() {
 
   // Returns the JSON structure
   this.getTrie = function () {
-    return trie;
+    return this.trie;
   };
 
   // Prints all words contained in the Trie
   this.getWords = function () {
-    return dig([], "", trie);
+    return dig([], "", this.trie);
   };
 
 }

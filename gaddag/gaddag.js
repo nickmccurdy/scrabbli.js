@@ -41,8 +41,7 @@ function Gaddag() {
   };
 
   this.findWordsWithHook = function (hook) {
-    var trie = Gaddag.prototype.getTrie(),
-      starterNode = trie[hook],
+    var starterNode = this.trie[hook],
       words = [];
 
     function dig(word, cur, direction) {
@@ -80,8 +79,7 @@ function Gaddag() {
   };
 
   this.findWordsWithRackAndHook = function (rack, hook) {
-    var trie = Gaddag.prototype.getTrie(),
-      words = [],
+    var words = [],
       h;
 
     /* To avoid recursing down duplicate characters more than once, sort the array and check whether we have already
@@ -145,10 +143,10 @@ function Gaddag() {
 
       while (rack.length > 1) {
         h = rack.shift();
-        findWordsRecurse("", rack, h, trie, 'reverse');
+        findWordsRecurse("", rack, h, this.trie, 'reverse');
       }
     } else {
-      findWordsRecurse("", rack, hook, trie, 'reverse');
+      findWordsRecurse("", rack, hook, this.trie, 'reverse');
     }
 
     return _.uniq(words);
