@@ -4,7 +4,7 @@ jslint:
 	jslint src/*.js --terse --indent=2 --nomen --plusplus
 
 csslint:
-	csslint --quiet --ignore=adjoining-classes *.css
+	csslint *.css --quiet --ignore=adjoining-classes
 
 deploy:
 	git checkout gh-pages
