@@ -1,15 +1,16 @@
-/*global $, _, Backbone, Board, Gaddag, dictionary */
+/*global $, _, Backbone, Board, BoardView, Gaddag, dictionary */
 
 "use strict";
 
 var Game = Backbone.Model.extend({
 
   defaults: {
-    board: new Board(),
-    gaddag: new Gaddag()
   },
 
   initialize: function () {
+    this.board = new Board();
+    this.board_view = new BoardView({ model: this.board });
+    this.gaddag = new Gaddag();
   }
 
 });
