@@ -1,5 +1,7 @@
 /*global $, _, Backbone */
 
+"use strict";
+
 var BoardView = Backbone.View.extend({
 
   initialize: function () {
