@@ -1,7 +1,7 @@
 lint: jslint csslint
 
 jslint:
-	jslint src/*.js --terse --indent=2 --nomen --plusplus
+	jslint src/**/*.js --terse --indent=2 --nomen --plusplus
 
 csslint:
 	csslint *.css --quiet --ignore=adjoining-classes
